@@ -4,6 +4,8 @@
 #include <algorithm>
 #include <stack>
 
+#include <iostream>
+
 using namespace std;
 
 vector<string> solution(vector<vector<string>> tickets) {
@@ -15,9 +17,20 @@ vector<string> solution(vector<vector<string>> tickets) {
         routes[ticket[0]].push_back(ticket[1]);
     }
     
-    for (auto& pair : routes) 
+    for (auto& value : routes) 
     {
-        sort(pair.second.rbegin(), pair.second.rend());
+        sort(value.second.rbegin(), value.second.rend());
+        // 내림차순 정렬
+    }
+    
+    for (auto& value : routes) 
+    {
+        cout << value.first << ": ";
+        for (auto& a : value.second)
+        {
+            cout << a << " ";
+        }
+        cout << "\n";
     }
     
     stack<string> s;
