@@ -8,8 +8,8 @@ bool solution(string s)
     
     for (char str : s) {
         str == '(' ? sum++ : sum--;
-        if (sum < 0) return false;
+        if (sum < 0) return 0;
     }
     
-    return sum == 0;
+    return !sum;
 }
