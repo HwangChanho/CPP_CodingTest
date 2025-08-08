@@ -16,13 +16,12 @@ void Union(int x, int y)
     x = Find(x);
     y = Find(y);
 
-    if (x != y)
-    {
-        if (x < y)
-            parent[y] = x;
-        else
-            parent[x] = y;
-    }
+    if (x == y) return;
+    
+    if (x < y)
+        parent[y] = x;
+    else
+        parent[x] = y;
 }
 
 int main()
@@ -30,10 +29,8 @@ int main()
     cin.tie(nullptr)->sync_with_stdio(false);
 
     cin >> n >> m;
-    for (int i = 0; i < n + 1; i++)
-    {
-        parent.push_back(i);
-    }
+    parent.reserve(n + 1);
+    for (int i = 0; i < n + 1; i++) parent[i] = i;
 
     for (int i = 0; i < m; i++)
     {
