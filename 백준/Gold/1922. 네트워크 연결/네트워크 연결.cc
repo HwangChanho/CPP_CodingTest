@@ -22,7 +22,7 @@ struct Node
 int N, M; // node, edge
 vector<bool> visited;
 vector<Node> mst;
-vector<Node> nodeList;
+vector<vector<Node>> nodeList;
 
 int main()
 {
@@ -30,6 +30,7 @@ int main()
 
     cin >> N >> M;
     visited.resize(N + 1, false);
+    nodeList.resize(N + 1);
 
     priority_queue<Node> pq; // min heap operator
     int startNode;
@@ -41,11 +42,11 @@ int main()
         if (i == 0)
             startNode = from;
 
-        nodeList.push_back(Node(from, to, weight));
-        nodeList.push_back(Node(to, from, weight));
+        nodeList[from].push_back(Node(from, to, weight));
+        nodeList[to].push_back(Node(to, from, weight));
     }
 
-    for (auto &node : nodeList)
+    for (auto &node : nodeList[startNode])
     {
         if (startNode == node.from)
             pq.push(node);
@@ -69,11 +70,8 @@ int main()
         if (mst.size() == N - 1)
             break;
 
-        for (auto &node : nodeList)
-        {
-            if (node.from == top.to)
-                pq.push(node);
-        }
+        for (auto &node : nodeList[top.to])
+            pq.push(node);
     }
 
     cout << total;
